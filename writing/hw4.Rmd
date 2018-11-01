@@ -15,6 +15,8 @@ library(broom)
 library(sf)
 library(tigris)
 library(purrr)
+library(ggplot2)
+library(knitr)
 ```
 #Homicide arrest rates in different major cities across the United States.#
 
@@ -63,7 +65,11 @@ unsolved_prop <- map2(unsolved$total_unsolved, unsolved$total_homicide, prop.tes
   map_df(tidy) %>% 
   select(estimate, conf.low, conf.high) %>% 
   mutate(city_name = unsolved$city_name)
+kable(unsolved_prop,
+      caption = "Unsolved Homicides by City")
 
 plot_data <- full_join(unsolved, unsolved_prop) %>%
   select(-total_homicide, -total_unsolved)
+
+
 ```
