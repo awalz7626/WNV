@@ -72,12 +72,14 @@ kable(unsolved_prop,
 
 plot_data <- full_join(unsolved, unsolved_prop) %>%
   select(-total_homicide, -total_unsolved) %>% 
-  mutate(estimate = percent(plot_data$estimate),
-         conf.low = percent(plot_data$conf.low),
-         conf.high = percent(plot_data$conf.high)) 
+  mutate(estimate = percent(estimate),
+         conf.low = percent(conf.low),
+         conf.high = percent(conf.high)) %>% 
+  arrange(desc(estimate))
 
-homicide_plot <- plot_data %>% 
-  ggplot(aes(x = estimate, y = city_name)) +
-  geom_point() +
-  geom_errorbarh()
+homicide_plot <- plot_data %>%
+  ggplot(aes(y = city_name)) +
+  geom_point(aes(x = estimate)) +
+  geom_errorbarh(aes(xmin = plot_data$conf.low,
+                 xmax = plot_data$conf.high))
 ```
