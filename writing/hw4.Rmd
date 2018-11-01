@@ -17,6 +17,8 @@ library(tigris)
 library(purrr)
 library(ggplot2)
 library(knitr)
+install.packages("scales")
+library(scales)
 ```
 #Homicide arrest rates in different major cities across the United States.#
 
@@ -69,7 +71,11 @@ kable(unsolved_prop,
       caption = "Unsolved Homicides by City")
 
 plot_data <- full_join(unsolved, unsolved_prop) %>%
-  select(-total_homicide, -total_unsolved)
+  select(-total_homicide, -total_unsolved) %>% 
+  mutate(estimate = percent(plot_data$estimate),
+         conf.low = percent(plot_data$conf.low),
+         conf.high = percent(plot_data$conf.high))
 
-
+homicide_plot <- plot_data %>% 
+  ggplot(aes())
 ```
