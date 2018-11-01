@@ -74,8 +74,10 @@ plot_data <- full_join(unsolved, unsolved_prop) %>%
   select(-total_homicide, -total_unsolved) %>% 
   mutate(estimate = percent(plot_data$estimate),
          conf.low = percent(plot_data$conf.low),
-         conf.high = percent(plot_data$conf.high))
+         conf.high = percent(plot_data$conf.high)) 
 
 homicide_plot <- plot_data %>% 
-  ggplot(aes())
+  ggplot(aes(x = estimate, y = city_name)) +
+  geom_point() +
+  geom_errorbarh()
 ```
