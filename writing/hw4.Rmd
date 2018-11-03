@@ -81,5 +81,7 @@ homicide_plot <- plot_data %>%
   ggplot(aes(y = city_name)) +
   geom_point(aes(x = estimate)) +
   geom_errorbarh(aes(xmin = plot_data$conf.low,
-                 xmax = plot_data$conf.high))
+                 xmax = plot_data$conf.high),
+                 height = 0) 
+homicide_plot
 ```
