@@ -5,8 +5,8 @@ date: "October 27, 2018"
 output: pdf_document
 ---
 
-```{r setup_global_options, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE, eval = TRUE, message = FALSE, warning = FALSE)
+```{r setup_global_options, eval = TRUE, include=FALSE}
+
 
 library(readr)
 library(dplyr)
@@ -17,7 +17,6 @@ library(tigris)
 library(purrr)
 library(ggplot2)
 library(knitr)
-install.packages("scales")
 library(scales)
 ```
 #Homicide arrest rates in different major cities across the United States.#
