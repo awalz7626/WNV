@@ -60,7 +60,7 @@ baltimore_prob
 tidy(baltimore_prob)
 ```
 
-```{r final_plot}
+```{r final_plot_tidy}
 #Tidying data for final graph
 unsolved_prop <- map2(unsolved$total_unsolved, unsolved$total_homicide, prop.test) %>% 
   map_df(tidy) %>% 
@@ -68,7 +68,9 @@ unsolved_prop <- map2(unsolved$total_unsolved, unsolved$total_homicide, prop.tes
   mutate(city_name = unsolved$city_name)
 kable(unsolved_prop,
       caption = "Unsolved Homicides by City")
+```
 
+```{r final_plot, fig.height=11}
 plot_data <- full_join(unsolved, unsolved_prop) %>%
   select(-total_homicide, -total_unsolved) %>% 
   arrange(desc(estimate))
